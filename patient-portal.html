@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patient Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRrrEq-13p9U4na8eONPcocvjI73YjebCvyA&s" alt="Health Tracker Logo">
+        </div>
+        <h1>Patient Portal</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="doctor-portal.html">Doctor Portal</a></li>
+                <li><a href="patient-portal.html">Patient Portal</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="health-vitals-section">
+            <h2>Update Your Health Vitals</h2>
+            <img src="https://media.istockphoto.com/id/1437830105/photo/cropped-shot-of-a-female-nurse-hold-her-senior-patients-hand-giving-support-doctor-helping.jpg?s=612x612&w=0&k=20&c=oKR-00at4oXr4tY5IxzqsswaLaaPsPRkdw2MJbYHWgA=" alt="Health Vitals" class="section-image">
+            <form action="update_health_vitals.php" method="POST" class="vitals-form">
+                <label for="bloodPressure">Blood Pressure (BP):</label>
+                <input type="text" id="bloodPressure" name="bloodPressure" required><br><br>
+
+                <label for="bloodSugar">Blood Sugar Level:</label>
+                <input type="text" id="bloodSugar" name="bloodSugar" required><br><br>
+
+                <label for="temperature">Body Temperature:</label>
+                <input type="text" id="temperature" name="temperature" required><br><br>
+
+                <label for="medicineTaken">Did you take your medicine today?</label>
+                <select id="medicineTaken" name="medicineTaken" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select><br><br>
+
+                <button type="submit" class="submit-btn">Update Health Vitals</button>
+            </form>
+        </section>
+
+       <section class="appointment-section">
+            <h2>Fix an Appointment</h2>
+            <p>Use the form below to schedule your appointment with the doctor:</p>
+            <form action="submit_appointment.php" method="POST" class="appointment-form">
+                <label for="doctorName">Doctor's Name:</label>
+                <input type="text" id="doctorName" name="doctorName" required><br><br>
+
+                <label for="appointmentDate">Preferred Appointment Date:</label>
+                <input type="date" id="appointmentDate" name="appointmentDate" required><br><br>
+
+                <label for="appointmentTime">Preferred Appointment Time:</label>
+                <input type="time" id="appointmentTime" name="appointmentTime" required><br><br>
+
+                <label for="reason">Reason for Visit:</label>
+                <textarea id="reason" name="reason" rows="4" required></textarea><br><br>
+
+                <label for="patientPhone">Your Phone Number:</label>
+                <input type="tel" id="patientPhone" name="patientPhone" required><br><br>
+
+                <button type="submit" class="submit-btn">Submit Appointment Request</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Health Tracker. All rights reserved.</p>
+    </footer>
+</body>
+</html>
