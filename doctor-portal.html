@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <color="olive">Medication Reminder</title>
+    <style>
+        /* Light Mode (Default) */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        /* Background Image */
+        .background {
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWasaBC-VpChK8yIhGQGAyUj4l-qF28JaK46sij6GxIHKz8i2NcNWxx5rob_TasCG99WIUl645-D9VOzvceBhJNThDExNi4DkJpkUVtJm4URRwixb0KVumVVxCXBmQ9-OqD6kIptmKfZn4/s1600/background+powerpoint+medical+stethoscope.JPG'); /* Change this to your own image */
+            background-size: cover;
+            background-position: down;
+            padding: 150px 0;
+            text-align: center;
+            color: black;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+
+        /* Button */
+        .toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #ff9900;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .toggle-btn.dark-mode {
+            background-color: #333;
+            color: #f4f7f6;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Styling */
+        form {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        label {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="tel"], textarea, input[type="datetime-local"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Schedule Box */
+        .schedule-box {
+            grid-column: span 2;
+            padding: 15px;
+            background-color: #f4f7f6;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .schedule-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .schedule-box p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #333;
+            color: #f4f7f6;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2 {
+            color: #f4f7f6;
+        }
+
+        body.dark-mode form input,
+        body.dark-mode textarea,
+        body.dark-mode button {
+            background-color: #555;
+            color: #f4f7f6;
+            border: 1px solid #777;
+        }
+
+        body.dark-mode button {
+            background-color: #333;
+        }
+
+        body.dark-mode .schedule-box {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Dark Mode Toggle Button -->
+<button id="themeToggle" class="toggle-btn">🌙</button>
+
+<!-- Background Section -->
+<div class="background">
+    <h1>Medication Reminder & Schedule</h1>
+    <h2>Helping you stay on track with your health goals</h2>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+    <form id="reminderForm">
+        <!-- Patient Information Section -->
+        <div>
+            <label for="patientName">Patient Name:</label>
+            <input type="text" id="patientName" name="patientName" required>
+        </div>
+        <div>
+            <label for="patientPhone">Patient Phone Number:</label>
+            <input type="tel" id="patientPhone" name="patientPhone" required>
+        </div>
+        <div>
+            <label for="message">Message (Optional):</label>
+            <textarea id="message" name="message" rows="4" placeholder="Enter a custom message..."></textarea>
+        </div>
+
+        <!-- Schedule Box Section -->
+        <div class="schedule-box">
+            <h3>Set Medication Schedule</h3>
+            <label for="medicationTime">Time to take medication:</label>
+            <input type="datetime-local" id="medicationTime" name="medicationTime" required>
+            <p>Make sure to take your medicine on time!</p>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Send Reminder</button>
+    </form>
+</div>
+
+<!-- JavaScript to Handle Theme and Form Submission -->
+<script>
+    // Function to toggle the light/dark mode
+    const themeToggle = document.getElementById("themeToggle");
+    const body = document.body;
+
+    // Check the saved theme preference in localStorage and apply it
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        body.classList.add("dark-mode");
+        themeToggle.textContent = "🌞"; // Change button text to sun (for light mode)
+    }
+
+    // Toggle the theme when the button is clicked
+    themeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        const isDarkMode = body.classList.contains("dark-mode");
+
+        // Update the theme preference in localStorage
+        if (isDarkMode) {
+            localStorage.setItem("theme", "dark");
+            themeToggle.textContent = "🌞"; // Sun emoji for light mode
+        } else {
+            localStorage.setItem("theme", "light");
+            themeToggle.textContent = "🌙"; // Moon emoji for dark mode
+        }
+    });
+
+    // Handle form submission
+    document.getElementById("reminderForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent page reload
+
+        // Get values from the form
+        const patientName = document.getElementById("patientName").value;
+        const patientPhone = document.getElementById("patientPhone").value;
+        const message = document.getElementById("message").value || `Hello ${patientName}, this is a friendly reminder to take your medication as prescribed by your doctor.`;
+        const medicationTime = document.getElementById("medicationTime").value;
+
+        // Prepare the data to send
+        const data = {
+            patientName: patientName,
+            patientPhone: patientPhone,
+            message: message,
+            medicationTime: medicationTime
+        };
+
+        // Send a POST request to the backend to send the SMS
+        fetch('http://localhost:3000/send-sms', {  // Adjust the URL if your backend is hosted elsewhere
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("SMS reminder sent successfully!");
+            } else {
+                alert("Failed to send SMS: " + data.error);
+            }
+        })
+        .catch(error => {
+            alert("Error sending SMS: " + error.message);
+        });
+    });
+</script>
+
+</body>
+</html>
