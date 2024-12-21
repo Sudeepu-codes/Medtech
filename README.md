@@ -32,9 +32,7 @@ A **Medical Reminder System** designed to help doctors manage patient medication
 
 ---
 
-## Installation
 
-Follow these steps to set up the project on your local machine.
 
 ### Prerequisites
 
